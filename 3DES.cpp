@@ -1,3 +1,5 @@
+//Aleksander Mielczarek
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -15,19 +17,17 @@ DES_cblock Key2 = { 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22 };
 DES_cblock Key3 = { 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33 };
 DES_key_schedule SchKey1, SchKey2, SchKey3;
 
-/* Print Encrypted and Decrypted data packets */
-void print_data(const char* tittle, const void* data, int len);
+//encription algorithm
+string encrypt_3DES(string input_file, string output_file) {
+    string cipher; //string of encrypted data
 
-string encrypt(string input_file, string output_file) {
-    string cipher;
-
-    ifstream ptxt;
-    ofstream ctxt;
-    ptxt.open(input_file);
-    ctxt.open(output_file);
-    string data;
-    stringstream sbuffer;
-    DES_cblock buffer;
+    ifstream ptxt; //input file
+    ofstream ctxt; // output file
+    ptxt.open(input_file); // open input file
+    ctxt.open(output_file); //open output file
+    string data; //string of input file
+    stringstream sbuffer; //stringstream for conversion of file to string
+    DES_cblock buffer; // 8 char buffer for encryption function
 
     ptxt.open(input_file);
     sbuffer << ptxt.rdbuf();
@@ -55,14 +55,9 @@ string encrypt(string input_file, string output_file) {
         DES_ecb3_encrypt(&buffer, &output, &SchKey1, &SchKey2, &SchKey3, DES_ENCRYPT);
         for (int i = 0; i < sizeof(output); i++) {
             cipher.push_back(output[i]);
-            //cout << output[i];
         }
-        /*
-        DES_cblock decipher;
-        DES_ecb3_encrypt(&output, &decipher, &SchKey1, &SchKey2, &SchKey3, DES_ENCRYPT);
-        for (int i = 0; i < sizeof(decipher); i++)
-            cout << decipher[i];*/
     }
+    /* Save encrypted data to file */
     if (ctxt.is_open())
     {
         ctxt << cipher;
@@ -72,8 +67,8 @@ string encrypt(string input_file, string output_file) {
         cout << "Unable to open file\n";
     return cipher;
 }
-
-string decrpyt(string input_file, string output_file) {
+//decryption algorithm
+string decrypt_3DES(string input_file, string output_file) {
     string deciphered;
 
     ifstream ptxt;
@@ -124,21 +119,9 @@ string decrpyt(string input_file, string output_file) {
     return deciphered;
 }
 
-int work() {
+void work() {
     cout << "Encrypted data: ";
-    cout << encrypt("plain.txt", "cipher.txt") << "\n";
+    cout << encrypt_3DES("plain.txt", "cipher.txt") << "\n";
     cout << "Decrypted data: ";
-    cout << decrpyt("cipher.txt", "deciphered.txt") << "\n";;
-}
-
-void print_data(const char* tittle, const void* data, int len)
-{
-    printf("%s : ", tittle);
-    const unsigned char* p = (const unsigned char*)data;
-    int i = 0;
-
-    for (; i < len; ++i)
-        printf("%02X ", *p++);
-
-    printf("\n");
+    cout << decrypt_3DES("cipher.txt", "deciphered.txt") << "\n";;
 }

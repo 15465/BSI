@@ -16,9 +16,14 @@ int main()
     unsigned int outLen = 0;  // out param - bytes in сiphertext
 
     AES aes(128);  //128 - key length, can be 128, 192 or 256
-    c = aes.EncryptECB(plain, plainLen, key, outLen);
+    unsigned char* c = aes.EncryptECB(plain, plainLen, key, outLen);
     //now variable c contains outLen bytes - ciphertext
-
-
-
+    cout << "Text: ";
+    for (int i = 0; i < plainLen; i++)cout << plain[i];
+    cout << endl << "Text after encryption: ";
+    for (int i = 0; i < plainLen; i++)cout << c[i];
+    cout << endl << "Text after decryption: ";
+    unsigned char* d = aes.DecryptECB(c, plainLen, key);
+    for (int i = 0; i < plainLen; i++)cout << d[i];
+    cout << endl;
 }
