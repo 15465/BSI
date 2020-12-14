@@ -18,10 +18,10 @@
     <ClCompile Include="BSI.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="DES.cpp">
+    <ClCompile Include="AES.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="AES.cpp">
+    <ClCompile Include="3DES.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
