@@ -1,5 +1,5 @@
 #include "AES.h"
-
+//By https://github.com/SergeyBel/AES
 AES::AES(int keyLen)
 {
     this->Nb = 4;
