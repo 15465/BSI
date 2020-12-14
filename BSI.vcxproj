@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="AES.cpp" />
     <ClCompile Include="BSI.cpp" />
+    <ClCompile Include="DES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AES.h" />
