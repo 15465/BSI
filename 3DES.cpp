@@ -1,24 +1,18 @@
 //Aleksander Mielczarek
+///3DES to algorytm stosuj¹cy algorytm DES trzykrotnie do ka¿dego bloku danych, u¿ywaj¹c trzech kluczy
+///
+///DES to block cipher, bior¹cy ci¹g znaków o sta³ej d³ugoœci i transformuje go na inny ci¹g znaków o tej samej d³ugoœci za pomoc¹ klucza.
 
 #include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <string>
-#include <string.h>
-#include <openssl/des.h>
-#include <sstream>
+#include "3DES.h"
 
-using namespace std;
-
-/* Triple DES key for Encryption and Decryption */
 DES_cblock Key1 = { 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11 };
 DES_cblock Key2 = { 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22 };
 DES_cblock Key3 = { 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33 };
 DES_key_schedule SchKey1, SchKey2, SchKey3;
 
 //encription algorithm
-string encrypt_3DES(string input_file, string output_file) {
+string Encrypt_3DES(string input_file, string output_file) {
     string cipher; //string of encrypted data
 
     ifstream ptxt; //input file
@@ -34,9 +28,9 @@ string encrypt_3DES(string input_file, string output_file) {
     data = sbuffer.str();
     ptxt.close();
 
-    
+    //divide data into 8 char sets
     for (int j = 0; j < data.size();) {
-        //divide data into 8 char sets
+
         for (int i = 0; i < 8; i++) {
             if (j < data.size()) {
                 buffer[i] = data[j];
@@ -46,7 +40,7 @@ string encrypt_3DES(string input_file, string output_file) {
                 buffer[i] = NULL;
                 j++;
             }
-                
+
         }
 
         //encrpyt
@@ -68,7 +62,7 @@ string encrypt_3DES(string input_file, string output_file) {
     return cipher;
 }
 //decryption algorithm
-string decrypt_3DES(string input_file, string output_file) {
+string Decrypt_3DES(string input_file, string output_file) {
     string deciphered;
 
     ifstream ptxt;
@@ -78,15 +72,11 @@ string decrypt_3DES(string input_file, string output_file) {
     string data;
     stringstream sbuffer;
     DES_cblock buffer;
-    
+
     ptxt.open(input_file);
     sbuffer << ptxt.rdbuf();
     data = sbuffer.str();
     ptxt.close();
-
-    //fix_newlines(data);
-    //cout << "\n kawabunga: \n";
-    //cout << data;
 
     for (int j = 0; j < data.size();) {
         //divide data into 8 char sets
@@ -99,7 +89,7 @@ string decrypt_3DES(string input_file, string output_file) {
                 buffer[i] = NULL;
                 j++;
             }
-                
+
         }
         //cout << data;
         //encrpyt
@@ -119,9 +109,9 @@ string decrypt_3DES(string input_file, string output_file) {
     return deciphered;
 }
 
-void work() {
+void Test_3DES() {
     cout << "Encrypted data: ";
-    cout << encrypt_3DES("plain.txt", "cipher.txt") << "\n";
+    cout << Encrypt_3DES("plain.txt", "cipher.txt") << "\n";
     cout << "Decrypted data: ";
-    cout << decrypt_3DES("cipher.txt", "deciphered.txt") << "\n";;
+    cout << Decrypt_3DES("cipher.txt", "deciphered.txt") << "\n";;
 }

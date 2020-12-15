@@ -152,6 +152,7 @@
     <ClCompile Include="3DES.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="3DES.h" />
     <ClInclude Include="AES.h" />
   </ItemGroup>
   <ItemGroup>

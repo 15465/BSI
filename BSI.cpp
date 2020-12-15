@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include "AES.h"
+#include "3DES.h"
 
 //Aleksander Mielczarek, Jakub Kowalewski
 
 //AES - https://github.com/SergeyBel/AES
 //RC5 - 
-//DES -
+//3DES - OpenSSL library
 
 int main()
 {   //AES vv
@@ -31,4 +32,6 @@ int main()
     cout << endl;
     //AES ^^
 
+    /* 3DES */
+    Test_3DES();
 }
