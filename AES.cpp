@@ -1,5 +1,20 @@
 #include "AES.h"
-//By https://github.com/SergeyBel/AES
+//By SergeyBel from https://github.com/SergeyBel/AES
+
+/*
+Advanced Encryption Standard - AES
+AES is a subset of the Rijndael block cipher developed by two Belgian cryptographers.
+Rijndael is a family of ciphers with different key and block sizes. For AES, NIST selected three members of the Rijndael family, 
+each with a block size of 128 bits, but three different key lengths: 128, 192 and 256 bits.
+AES has been adopted by the U.S. government and is now used worldwide. It supersedes the Data Encryption Standard (DES), which was published in 1977. 
+The algorithm described by AES is a symmetric-key algorithm, meaning the same key is used for both encrypting and decrypting the data.
+AES is based on a design principle known as a substitution–permutation network, and is efficient in both software and hardware.
+AES operates on a 4 × 4 column-major order array of bytes, termed the state. Most AES calculations are done in a particular finite field.
+The key size used for an AES cipher specifies the number of transformation rounds that convert the input, called the plaintext, into the final output, called the ciphertext.
+Each round consists of several processing steps, including one that depends on the encryption key itself. A set of reverse rounds are applied to transform ciphertext 
+back into the original plaintext using the same encryption key.
+*/
+
 AES::AES(int keyLen)
 {
     this->Nb = 4;
